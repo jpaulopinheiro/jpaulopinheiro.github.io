@@ -1,8 +1,8 @@
 $(function() {
-    obterDataAtual();
+	moment.locale('pt-BR');
+    $("#data-venda").val(obterDataAtual());
 });
  
-function obterDataAtual() {
-	var dataAtual = new Date();
-    $("#data-venda").val(dataAtual);
+function obterDataAtualFormatada() {
+	return moment().format(L); 
 };
