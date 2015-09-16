@@ -56,8 +56,8 @@ function removerTodasLinhas() {
 }
 
 function ehDiaUtil(diaDaSemana){
-	var diasNaoUteis = [0,6];
-	if($.inArray(diaDaSemana, diasNaoUteis)){
+	// dias nao úteis retornados pelo moment.js [0,6];
+	if(diaDaSemana == 0 || diaDaSemana == 6)){
 		return false;
 	} else return true;
 }
