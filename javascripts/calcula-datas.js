@@ -12,7 +12,7 @@ function obterDataAtualFormatada() {
 }
 
 function calcularDatas() {
-	var m = moment($("#data-venda").val());
+	var m = moment($("#data-venda").val(), "DD/MM/YYYY");
 	var numParcelas = $("#parcelas").val();
 
 	for(parcela=1;parcela<=numParcelas;parcela++){
