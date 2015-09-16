@@ -60,5 +60,5 @@ function ehDiaUtil(diaDaSemana){
 	var diasNaoUteis = [0,6];
 	if($.inArray(diaDaSemana, diasNaoUteis) == -1){
 		return true;
-	} else return true;
+	} else return false;
 }
