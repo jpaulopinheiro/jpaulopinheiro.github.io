@@ -22,11 +22,13 @@ function calcularDatas() {
 	$("#parcelas").prop( "disabled", true );
 	$("#botao-calcular").prop( "disabled", true );
 	$("#botao-limpar").prop( "disabled", false );
+	$("#botao-limpar").focus();
 	$("#resultados").show();
 }
 
 function limpar() {
 	$("#data-venda").prop( "disabled", false );
+	$("#data-venda").focus();
 	$("#parcelas").prop( "disabled", false );
 	$("#botao-calcular").prop( "disabled", false );
 	$("#botao-limpar").prop( "disabled", true );
