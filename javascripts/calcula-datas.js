@@ -35,6 +35,7 @@ function limpar() {
 	$("#parcelas").prop( "disabled", false );
 	$("#botao-calcular").prop( "disabled", false );
 	$("#botao-limpar").prop( "disabled", true );
+	removerTodasLinhas();
 	$("#tabela-resultados").hide();
 }
 
@@ -44,4 +45,8 @@ function adicionarLinha(parcela, data){
         "<td>"+ parcela +"</td>"+
         "<td>"+ data +"</td>"+
         "</tr>");
-};
+}
+
+function removerTodasLinhas() {
+    $('#tabela-resultados tbody tr').remove();
+}
