@@ -4,6 +4,6 @@ $(function() {
 });
  
 function obterDataAtualFormatada() {
-	var dataAtualFormatada = moment().format(L);
+	var dataAtualFormatada = moment().format('L');
 	return dataAtualFormatada;
 }
