@@ -18,9 +18,17 @@ function calcularDatas() {
 		$(p).html(dataParcela.format('L'));
 		m = moment(dataParcela);
 	}
+	$("#data-venda").prop( "disabled", true );
+	$("#parcelas").prop( "disabled", true );
+	$("#botao-calcular").prop( "disabled", true );
+	$("#botao-limpar").prop( "disabled", false );
 	$("#resultados").show();
 }
 
 function limpar() {
+	$("#data-venda").prop( "disabled", false );
+	$("#parcelas").prop( "disabled", false );
+	$("#botao-calcular").prop( "disabled", false );
+	$("#botao-limpar").prop( "disabled", true );
 	$("#resultados").hide();
 }
