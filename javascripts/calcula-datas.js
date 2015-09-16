@@ -1,7 +1,6 @@
 $(function() {
 	moment.locale('pt-BR');
-    //$("#data-venda").val(moment().toDate());
-	$("#data-venda").val(moment().format('L'));
+	//setar data atual em $("#data-venda")
     $("#botao-calcular").click(calcularDatas);
     $("#botao-limpar").click(limpar);
     $("#botao-limpar").prop( "disabled", true );
@@ -13,7 +12,7 @@ function obterDataAtualFormatada() {
 }
 
 function calcularDatas() {
-	var m = moment($("#data-venda").val(), "DD/MM/YYYY");
+	var m = moment($("#data-venda").val());
 	var numParcelas = $("#parcelas").val();
 
 	for(parcela=1;parcela<=numParcelas;parcela++){
