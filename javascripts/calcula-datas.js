@@ -12,15 +12,16 @@ function obterDataAtual() {
 }
 
 function calcularDatas() {
-	var m = moment($("#data-venda").val());
+	var dataVenda = moment($("#data-venda").val());
 	var numParcelas = $("#num-parcelas").val();
 	var prazo = 30;
 
 	for(parcela=1;parcela<=numParcelas;parcela++){
-		var dataParcela = m.add(prazo, 'days');
+		var dataParcela = dataVenda;
+		dataParcela.add(prazo, 'days');
 		var diaDaSemana = dataParcela.day();
 		while(!ehDiaUtil(diaDaSemana)){
-			dataParcela = m.add(1, 'days');
+			dataParcela.add(1, 'days');
 			diaDaSemana = dataParcela.day();
 		}
 		adicionarLinha(parcela, dataParcela.format('L'));
