@@ -3,6 +3,7 @@ $(function() {
     $("#data-venda").val(obterDataAtualFormatada());
     $("#botao-calcular").click(calcularDatas);
     $("#botao-limpar").click(limpar);
+    $("#resultados").hide();
 });
  
 function obterDataAtualFormatada() {
