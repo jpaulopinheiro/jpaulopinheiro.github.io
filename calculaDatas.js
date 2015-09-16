@@ -5,4 +5,4 @@ $(function() {
  
 function obterDataAtualFormatada() {
 	return moment().format(L); 
-};
+}
