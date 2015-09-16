@@ -7,8 +7,8 @@ $(function() {
     $("#tabela-resultados").hide();
 });
  
-function obterDataAtualFormatada() {
-	return moment().format('L');
+function obterDataAtual() {
+	return moment().toDate();
 }
 
 function calcularDatas() {

@@ -20,8 +20,8 @@
         <p>Calcular Datas de Pagamento</p>
       </header>
       <section>
-		<p>Data da Venda: <input type="date" id="data-venda" autofocus="true" size="8" /></p>
-		<p>Parcelas: <input type="text" id="parcelas" maxlength="2" max="12" size="2" value="1" /></p>
+		<p>Data da Venda: <input type="date" id="data-venda" autofocus="true" size="8" max="obterDataAtual()"/></p>
+		<p>Parcelas: <input type="text" id="parcelas" maxlength="2" max="12" size="2" value="1" max="12" /></p>
 		<p>
 			<input type="button" id="botao-calcular" value="Calcular" />
 			<input type="button" id="botao-limpar" value="Limpar" />
