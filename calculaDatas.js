@@ -1,7 +1,7 @@
 $(function() {
 	moment.locale('pt-BR');
     $("#data-venda").val(obterDataAtualFormatada());
-    $("#botao-calcular").click(calcularDatas())
+    $("#botao-calcular").click(calcularDatas);
 });
  
 function obterDataAtualFormatada() {
