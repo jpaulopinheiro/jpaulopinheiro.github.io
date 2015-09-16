@@ -3,6 +3,7 @@ $(function() {
 	//setar data atual em $("#data-venda")
     $("#botao-calcular").click(calcularDatas);
     $("#botao-limpar").click(limpar);
+    $("#tipo-cartao").change(habilitarParcelamento);
     $("#botao-limpar").prop( "disabled", true );
     $("#tabela-resultados").hide();
 });
@@ -43,6 +44,10 @@ function limpar() {
 	$("#botao-limpar").prop( "disabled", true );
 	removerTodasLinhas();
 	$("#tabela-resultados").hide();
+}
+
+function habilitarParcelamento(){
+	alert("alterou tipo-cartao")
 }
 
 function adicionarLinha(parcela, data){
