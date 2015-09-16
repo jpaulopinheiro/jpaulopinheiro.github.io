@@ -1,6 +1,6 @@
 $(function() {
 	moment.locale('pt-BR');
-    $("#data-venda").val(obterDataAtual());
+    $("#data-venda").val(obterDataAtualFormatada());
 });
  
 function obterDataAtualFormatada() {
