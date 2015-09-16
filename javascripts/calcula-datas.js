@@ -13,7 +13,7 @@ function obterDataAtual() {
 
 function calcularDatas() {
 	var m = moment($("#data-venda").val());
-	var numParcelas = $("#parcelas").val();
+	var numParcelas = $("#num-parcelas").val();
 
 	for(parcela=1;parcela<=numParcelas;parcela++){
 		var dataParcela = m.add(30, 'days');
