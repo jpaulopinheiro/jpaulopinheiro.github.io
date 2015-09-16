@@ -12,11 +12,13 @@ function obterDataAtualFormatada() {
 
 function calcularDatas() {
 	var m = moment($("#data-venda").val());
-	var parcelas = $("#parcelas").val();
-	for(i=1;i<=parcelas;i++){
+	var numParcelas = $("#parcelas").val();
+
+	for(parcela=1;i<=numParcelas;parcela++){
 		var dataParcela = m.add(30, 'days');
-		var p = "#p" + i;
-		$(p).html(dataParcela.format('L'));
+		//var p = "#p" + i;
+		//$(p).html(dataParcela.format('L'));
+		adicionarLinha(parcela, dataParcela)
 		m = moment(dataParcela);
 	}
 	$("#data-venda").prop( "disabled", true );
@@ -35,3 +37,14 @@ function limpar() {
 	$("#botao-limpar").prop( "disabled", true );
 	$("#resultados").hide();
 }
+
+function adicionarLinha(parcela, data){
+    $("#tabela-resultados tbody").append(
+    	"<tr>"+
+        "<td>"+ parcela +"</td>"+
+        "<td>"+ data +"</td>"+
+        "</tr>");
+};
+
+Read more: http://www.linhadecodigo.com.br/artigo/3426/editando-e-removendo-linhas-em-uma-tabela-html-com-jquery.aspx#ixzz3luA45Fc5
+
