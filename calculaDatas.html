@@ -20,9 +20,26 @@
         <p>Calcular Datas de Pagamento</p>
       </header>
       <section>
-		<p>Data da Venda: <input type="text" id="data-venda" autofocus="true" /></p>
-		<p>Parcelas: <input type="text" id="parcelas" maxlength="2" max="12"/></p>
-		<p><input type="button" id="botao-calcular" value="Calcular" /></p>
+		<p>Data da Venda: <input type="text" id="data-venda" autofocus="true" size="5" /></p>
+		<p>Parcelas: <input type="text" id="parcelas" maxlength="2" max="12" size="1" value="1" /></p>
+		<p>
+			<input type="button" id="botao-calcular" value="Calcular" />
+			<input type="button" id="botao-limpar" value="Limpar" />
+		</p>
+		<div id="resultados">
+			<p>1ª parcela: <label id="p1"></label> </p>
+			<p>2ª parcela: <label id="p2"></label> </p>
+			<p>3ª parcela: <label id="p3"></label> </p>
+			<p>4ª parcela: <label id="p4"></label> </p>
+			<p>5ª parcela: <label id="p5"></label> </p>
+			<p>6ª parcela: <label id="p6"></label> </p>
+			<p>7ª parcela: <label id="p7"></label> </p>
+			<p>8ª parcela: <label id="p8"></label> </p>
+			<p>9ª parcela: <label id="p9"></label> </p>
+			<p>10ª parcela: <label id="p10"></label> </p>
+			<p>11ª parcela: <label id="p11"></label> </p>
+			<p>12ª parcela: <label id="p12"></label> </p>
+		</div>
       </section>
     </div>
     <footer>
