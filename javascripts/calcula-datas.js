@@ -18,7 +18,7 @@ function calcularDatas() {
 		var dataParcela = m.add(30, 'days');
 		//var p = "#p" + i;
 		//$(p).html(dataParcela.format('L'));
-		adicionarLinha(parcela, dataParcela)
+		adicionarLinha(parcela, dataParcela.format('L'))
 		m = moment(dataParcela);
 	}
 	$("#data-venda").prop( "disabled", true );
