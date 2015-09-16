@@ -18,6 +18,7 @@ function calcularDatas() {
 		$(p).html(dataParcela.format('L'));
 		m = moment(dataParcela);
 	}
+	$("#resultados").show();
 }
 
 function limpar() {
