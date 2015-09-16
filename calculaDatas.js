@@ -15,7 +15,8 @@ function calcularDatas() {
 	for(i=1;i<=parcelas;i++){
 		var dataParcela = m.add(30, 'days');
 		var p = "#p" + i;
-		$("#p1").html(dataParcela.format('L'));
+		var d = dataParcela.format('L');
+		$("#p1").html(d);
 		m = moment(dataParcela);
 	}
 }
