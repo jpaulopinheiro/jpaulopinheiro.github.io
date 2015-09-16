@@ -17,7 +17,7 @@ function calcularDatas() {
 	var prazo = 30;
 
 	for(parcela=1;parcela<=numParcelas;parcela++){
-		var dataParcela = dataVenda;
+		var dataParcela = dataVenda.clone();
 		dataParcela.add(prazo, 'days');
 		var diaDaSemana = dataParcela.day();
 		while(!ehDiaUtil(diaDaSemana)){
