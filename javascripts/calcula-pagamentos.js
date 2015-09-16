@@ -47,7 +47,10 @@ function limpar() {
 }
 
 function habilitarParcelamento(){
-	alert("alterou tipo-cartao")
+	var tipoCartao = $("#tipo-cartao").val();
+	if(tipoCartao == 1){
+		$("#parcelamento").show();
+	} else $("#parcelamento").hide();
 }
 
 function adicionarLinha(parcela, data){
