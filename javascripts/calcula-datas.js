@@ -1,7 +1,6 @@
 $(function() {
 	moment.locale('pt-BR');
-    //$("#data-venda").val(moment().toDate());
-    $("#data-venda").attr('value', moment().toDate());
+    $("#data-venda").val(moment().format('L)'));
     $("#botao-calcular").click(calcularDatas);
     $("#botao-limpar").click(limpar);
     $("#botao-limpar").prop( "disabled", true );
