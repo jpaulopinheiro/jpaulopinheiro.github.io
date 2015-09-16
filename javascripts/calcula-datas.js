@@ -14,7 +14,7 @@ function calcularDatas() {
 	var m = moment($("#data-venda").val());
 	var numParcelas = $("#parcelas").val();
 
-	for(parcela=1;i<=numParcelas;parcela++){
+	for(parcela=1;parcela<=numParcelas;parcela++){
 		var dataParcela = m.add(30, 'days');
 		//var p = "#p" + i;
 		//$(p).html(dataParcela.format('L'));
