@@ -3,6 +3,7 @@ $(function() {
     $("#data-venda").val(obterDataAtualFormatada());
     $("#botao-calcular").click(calcularDatas);
     $("#botao-limpar").click(limpar);
+    $("#botao-limpar").prop( "disabled", true );
     $("#tabela-resultados").hide();
 });
  
@@ -16,8 +17,6 @@ function calcularDatas() {
 
 	for(parcela=1;parcela<=numParcelas;parcela++){
 		var dataParcela = m.add(30, 'days');
-		//var p = "#p" + i;
-		//$(p).html(dataParcela.format('L'));
 		adicionarLinha(parcela, dataParcela.format('L'))
 		m = moment(dataParcela);
 	}
