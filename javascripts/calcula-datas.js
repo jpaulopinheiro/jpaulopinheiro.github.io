@@ -42,11 +42,11 @@ function limpar() {
 function adicionarLinha(parcela, data){
     $("#tabela-resultados tbody").append(
     	"<tr>"+
-        "<td>"+ parcela +"</td>"+
-        "<td>"+ data +"</td>"+
+	        "<td>"+ parcela +"</td>"+
+	        "<td>"+ data +"</td>"+
         "</tr>");
 }
 
 function removerTodasLinhas() {
-    $('#tabela-resultados tbody tr').remove();
+    $("#tabela-resultados tbody tr").remove();
 }
