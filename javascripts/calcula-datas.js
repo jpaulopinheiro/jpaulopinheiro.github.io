@@ -17,7 +17,12 @@ function calcularDatas() {
 
 	for(parcela=1;parcela<=numParcelas;parcela++){
 		var dataParcela = m.add(30, 'days');
-		adicionarLinha(parcela, dataParcela.format('L'))
+		var diaDaSemana = dataParcela.day();
+		while(!ehDiaUtil(diaDaSemana)){
+			dataParcela = m.add(1, 'days');
+			diaDaSemana = dataParcela.day();
+		}
+		adicionarLinha(parcela, dataParcela.format('L'));
 		m = moment(dataParcela);
 	}
 	$("#data-venda").prop( "disabled", true );
@@ -48,4 +53,11 @@ function adicionarLinha(parcela, data){
 
 function removerTodasLinhas() {
     $("#tabela-resultados tbody tr").remove();
+}
+
+function ehDiaUtil(diaDaSemana){
+	var diasNaoUteis = [0,6];
+	if($.inArray(diaDaSemana, diasNaoUteis)){
+		return false;
+	} else return true;
 }
