@@ -1,5 +1,5 @@
 $(function() {
-	//moment.locale('pt-BR');
+	moment.locale('pt-BR');
     $("#data-venda").val(obterDataAtualFormatada());
     $("#botao-calcular").click(calcularDatas);
     $("#botao-limpar").click(limpar);
