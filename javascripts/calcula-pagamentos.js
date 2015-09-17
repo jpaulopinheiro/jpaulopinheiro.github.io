@@ -95,7 +95,7 @@ function habilitarParcelamento(){
 
 function montarTabelaResultados(numParcelas, datas){
 	for(i=1;i<=numParcelas;i++){
-		adicionarLinha(i, data[i].format('L'));
+		adicionarLinha(i, datas[i].format('L'));
 	}	
 }
 
