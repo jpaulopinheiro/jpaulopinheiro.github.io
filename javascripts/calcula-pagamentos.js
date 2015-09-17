@@ -1,41 +1,79 @@
 $(function() {
 	moment.locale('pt-BR');
 	//setar data atual em $("#data-venda")
-    $("#botao-calcular").click(calcularDatas);
+    //$("#botao-calcular").click(calcularDatas);
+	$("#botao-calcular").click(calcular);
     $("#botao-limpar").click(limpar);
     $("#tipo-cartao").change(habilitarParcelamento);
     $("#botao-limpar").prop( "disabled", true );
     $("#tabela-resultados").hide();
     $("#parcelamento").hide();
 });
- 
-function calcularDatas() {
+
+function calcular(){
 	var dataVenda = moment($("#data-venda").val());
-	var numParcelas = $("#num-parcelas").val();
+	var tipoCartao = $("#tipo-cartao").val();
+	var numParcelas = obterNumeroDeParcelas(tipoCartao);
+	var bandeiraCartao = "MC";
+	
+	var datas = calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numParcelas);
+	montarTabelaResultados(datas);	
+}
+
+function obterNumeroDeParcelas(tipoCartao){
+	if(tipoCartao == 2){
+		return 1;
+	} else return $("#num-parcelas").val();
+}
+ 
+//function calcularDatas() {
+//	var dataVenda = moment($("#data-venda").val());
+//	var numParcelas = $("#num-parcelas").val();
+//	var prazo = 30;
+//	
+//	var tipoCartao = $("#tipo-cartao").val();
+//	var valorVenda = $("#valor-venda").val();
+//	calcularValorParcela(valorVenda,numParcelas,tipoCartao);
+//	
+//
+//	for(parcela=1;parcela<=numParcelas;parcela++){
+//		var dataParcela = dataVenda.clone();
+//		dataParcela.add(prazo, 'days');
+//		var diaDaSemana = dataParcela.day();
+//		while(!ehDiaUtil(diaDaSemana)){
+//			dataParcela.add(1, 'days');
+//			diaDaSemana = dataParcela.day();
+//		}
+//		adicionarLinha(parcela, dataParcela.format('L'));
+//		prazo=prazo+30;
+//	}
+//	$("#data-venda").prop( "disabled", true );
+//	$("#num-parcelas").prop( "disabled", true );
+//	$("#botao-calcular").prop( "disabled", true );
+//	$("#botao-limpar").prop( "disabled", false );
+//	$("#botao-limpar").focus();
+//	$("#tabela-resultados").show();
+//}
+
+function calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numParcelas) {
+	var datas = new Array();
 	var prazo = 30;
 	
-	var tipoCartao = $("#tipo-cartao").val();
-	var valorVenda = $("#valor-venda").val();
-	calcularValorParcela(valorVenda,numParcelas,tipoCartao);
-	
-
-	for(parcela=1;parcela<=numParcelas;parcela++){
-		var dataParcela = dataVenda.clone();
-		dataParcela.add(prazo, 'days');
-		var diaDaSemana = dataParcela.day();
-		while(!ehDiaUtil(diaDaSemana)){
-			dataParcela.add(1, 'days');
-			diaDaSemana = dataParcela.day();
+	if(bandeiraCartao == "MC"){
+		for(i=1;i<=numParcelas;i++){
+			var dataParcela = dataVenda.clone();
+			dataParcela.add(prazo, 'days');
+			var diaDaSemana = dataParcela.day();
+			while(!ehDiaUtil(diaDaSemana)){
+				dataParcela.add(1, 'days');
+				diaDaSemana = dataParcela.day();
+			}
+			datas.push(dataParcela);
+			prazo=prazo+30;
 		}
-		adicionarLinha(parcela, dataParcela.format('L'));
-		prazo=prazo+30;
 	}
-	$("#data-venda").prop( "disabled", true );
-	$("#num-parcelas").prop( "disabled", true );
-	$("#botao-calcular").prop( "disabled", true );
-	$("#botao-limpar").prop( "disabled", false );
-	$("#botao-limpar").focus();
-	$("#tabela-resultados").show();
+	
+	return datas;
 }
 
 function limpar() {
@@ -53,6 +91,12 @@ function habilitarParcelamento(){
 	if(tipoCartao == 1){
 		$("#parcelamento").show();
 	} else $("#parcelamento").hide();
+}
+
+function montarTabelaResultados(numParcelas, datas){
+	for(i=1;i<=numParcelas;i++){
+		adicionarLinha(i, data[i].format('L'));
+	}	
 }
 
 function adicionarLinha(parcela, data){
@@ -80,7 +124,7 @@ function calcularValorParcela(valorVenda, numParcelas, tipoCartao){
 	if(valor.mod(numParcelas) != 0){
 		var valorParcela = valor.div(numParcelas);
 		if(ehDizimaPeriodica(valorParcela.toString())){
-			alert("Dízima Periódica!");
+			
 		}
 	}
 }
