@@ -17,7 +17,7 @@ function calcular(){
 	var bandeiraCartao = "MC";
 	
 	var datas = calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numParcelas);
-	montarTabelaResultados(datas);	
+	montarTabelaResultados(numParcelas, datas);	
 }
 
 function obterNumeroDeParcelas(tipoCartao){
