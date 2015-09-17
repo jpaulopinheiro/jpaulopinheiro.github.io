@@ -6,6 +6,7 @@ $(function() {
     $("#tipo-cartao").change(habilitarParcelamento);
     $("#botao-limpar").prop( "disabled", true );
     $("#tabela-resultados").hide();
+    $("#parcelamento").hide();
 });
  
 function calcularDatas() {
