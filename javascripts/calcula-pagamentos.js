@@ -79,10 +79,44 @@ function calcularValorParcela(valorVenda, numParcelas, tipoCartao){
 	var valor = Big(valorVenda);
 	if(valor.mod(numParcelas) != 0){
 		var valorParcela = valor.div(numParcelas);
-		var fraction = Fraction(valorParcela.valueOf());
-		var strFraction = fraction.toString();
-		if(strFraction.indexOf("(") != -1 && strFraction.indexOf(")") != -1){
-			alert(strFraction + " = Dízima periódica");
+		//var fraction = Fraction(valorParcela.valueOf());
+		//var strFraction = fraction.toString();
+		//if(strFraction.indexOf("(") != -1 && strFraction.indexOf(")") != -1){
+			//alert(strFraction + " = Dízima periódica");
+		//}
+		var strValor = formatDeciaml(valorParcela.toString());
+		if(strValor.indexOf("(") != -1 && strValor.indexOf(")") != -1){
+			alert(strValor + " = Dízima periódica");
 		}
 	}
+}
+
+function formatDecimal(str) {
+
+    var comma, pre, offset, pad, times, repeat;
+
+    if (-1 === (comma = str.indexOf(".")))
+        return str;
+
+    pre = str.substr(0, comma + 1);
+    str = str.substr(comma + 1);
+
+    for (var i = 0; i < str.length; i++) {
+
+        offset = str.substr(0, i);
+
+        for (var j = 0; j < 5; j++) {
+
+            pad = str.substr(i, j + 1);
+
+            times = Math.ceil((str.length - offset.length) / pad.length);
+
+            repeat = new Array(times + 1).join(pad); // Silly String.repeat hack
+
+            if (0 === (offset + repeat).indexOf(str)) {
+                return pre + offset + "(" + pad + ")";
+            }
+        }
+    }
+    return null;
 }
