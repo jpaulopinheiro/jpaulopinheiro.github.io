@@ -20,6 +20,7 @@ function calcular(){
 	var datas = calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas);
 	//var valores = calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas);
 	
+	var valores = new Array();
 	montarTabelaResultados(numeroParcelas, datas, valores);	
 
 	$("#data-venda").prop( "disabled", true );
