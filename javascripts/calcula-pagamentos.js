@@ -8,14 +8,14 @@ $(function() {
     $("#tabela-resultados").hide();
 });
  
-function obterDataAtual() {
-	return moment().toDate();
-}
-
 function calcularDatas() {
 	var dataVenda = moment($("#data-venda").val());
 	var numParcelas = $("#num-parcelas").val();
-	var prazo = 30;
+	var prazo = 30;]
+	
+	var valorVenda = $("#valor-venda").val();
+	calcularValorParcela(90,numParcelas,1);
+	
 
 	for(parcela=1;parcela<=numParcelas;parcela++){
 		var dataParcela = dataVenda.clone();
@@ -71,4 +71,10 @@ function ehDiaUtil(diaDaSemana){
 	if($.inArray(diaDaSemana, diasNaoUteis) == -1){
 		return true;
 	} else return false;
+}
+
+function calcularValorParcela(valorVenda, numParcelas, tipoCartao){
+	var valor = Big(valorVenda);
+	alert(valor.mod(numParcelas));
+	
 }
