@@ -79,15 +79,10 @@ function calcularValorParcela(valorVenda, numParcelas, tipoCartao){
 	var valor = Big(valorVenda);
 	if(valor.mod(numParcelas) != 0){
 		var valorParcela = valor.div(numParcelas);
-		alert(valorParcela);
+		var fraction = Fraction(valorParcela.valueOf());
+		var strFraction = fraction.toString();
+		if(strFraction.indexOf("(") != -1 && strFraction.indexOf(")") != -1){
+			alert(strFraction + " = Dízima periódica");
+		}
 	}
-	alert("Usando fraction.js");
-	var x = new Fraction(1/3);
-	alert("1/3 = " + x.toString());
-	var y = new Fraction(4/13);
-	alert("4/13 = " + y.toString());
-	var p = new Fraction([3].length, 6).toString();
-	alert("p = " + p);
-	
-	
 }
