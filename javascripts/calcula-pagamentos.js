@@ -41,7 +41,8 @@ function calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas) {
 	var datas = new Array();
 	var prazo = 30;
 	
-	if(bandeiraCartao == 4){
+	// MasterCard
+	if(bandeiraCartao == 3){
 		for(i=1;i<=numeroParcelas;i++){
 			var dataParcela = dataVenda.clone();
 			dataParcela.add(prazo, 'days');
@@ -117,8 +118,6 @@ function calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas)
 			valores.push(valorParcela);
 		}
 	}
-	alert(valorBruto.toString());
-	
 	return valores;	
 }
 
