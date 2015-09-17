@@ -131,8 +131,8 @@ function calcularValorParcela(valorVenda, numeroParcelas, tipoCartao){
 	}
 }
 
-function ehDizimaPeriodica(valor){
-	var strValor = new Fraction(valor).toString();
+function ehDizimaPeriodica(numerador, denominador){
+	var strValor = new Fraction(numerador, denominador).toString();
 	if(strValor.indexOf("(") != -1 && strValor.indexOf(")") != -1){
 		return true;
 	} else return false;	
