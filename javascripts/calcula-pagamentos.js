@@ -13,12 +13,12 @@ $(function() {
 function calcular(){
 	var dataVenda = moment($("#data-venda").val());
 	var tipoCartao = $("#tipo-cartao").val();
-	var numParcelas = obterNumeroDeParcelas(tipoCartao);
+	var numeroParcelas = obterNumeroParcelas(tipoCartao);
 	var bandeiraCartao = "MC";
 	
-	var datas = calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numParcelas);
+	var datas = calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas);
 
-	montarTabelaResultados(numParcelas, datas);	
+	montarTabelaResultados(numeroParcelas, datas);	
 
 	$("#data-venda").prop( "disabled", true );
 	$("#num-parcelas").prop( "disabled", true );
@@ -29,47 +29,18 @@ function calcular(){
 
 }
 
-function obterNumeroDeParcelas(tipoCartao){
+function obterNumeroParcelas(tipoCartao){
 	if(tipoCartao == 2){
 		return 1;
-	} else return $("#num-parcelas").val();
+	} else return $("#numero-parcelas").val();
 }
  
-//function calcularDatas() {
-//	var dataVenda = moment($("#data-venda").val());
-//	var numParcelas = $("#num-parcelas").val();
-//	var prazo = 30;
-//	
-//	var tipoCartao = $("#tipo-cartao").val();
-//	var valorVenda = $("#valor-venda").val();
-//	calcularValorParcela(valorVenda,numParcelas,tipoCartao);
-//	
-//
-//	for(parcela=1;parcela<=numParcelas;parcela++){
-//		var dataParcela = dataVenda.clone();
-//		dataParcela.add(prazo, 'days');
-//		var diaDaSemana = dataParcela.day();
-//		while(!ehDiaUtil(diaDaSemana)){
-//			dataParcela.add(1, 'days');
-//			diaDaSemana = dataParcela.day();
-//		}
-//		adicionarLinha(parcela, dataParcela.format('L'));
-//		prazo=prazo+30;
-//	}
-//	$("#data-venda").prop( "disabled", true );
-//	$("#num-parcelas").prop( "disabled", true );
-//	$("#botao-calcular").prop( "disabled", true );
-//	$("#botao-limpar").prop( "disabled", false );
-//	$("#botao-limpar").focus();
-//	$("#tabela-resultados").show();
-//}
-
-function calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numParcelas) {
+function calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas) {
 	var datas = new Array();
 	var prazo = 30;
 	
 	if(bandeiraCartao == "MC"){
-		for(i=1;i<=numParcelas;i++){
+		for(i=1;i<=numeroParcelas;i++){
 			var dataParcela = dataVenda.clone();
 			dataParcela.add(prazo, 'days');
 			var diaDaSemana = dataParcela.day();
@@ -91,7 +62,7 @@ function limpar() {
 	$("#num-parcelas").prop( "disabled", false );
 	$("#botao-calcular").prop( "disabled", false );
 	$("#botao-limpar").prop( "disabled", true );
-	removerTodasLinhas();
+	limparTabelaResultados();
 	$("#tabela-resultados").hide();
 }
 
@@ -102,13 +73,13 @@ function habilitarParcelamento(){
 	} else $("#parcelamento").hide();
 }
 
-function montarTabelaResultados(numParcelas, datas){
-	for(i=1;i<=numParcelas;i++){
-		adicionarLinha(i, datas[i-1].format('L'));
+function montarTabelaResultados(numeroParcelas, datas){
+	for(i=1;i<=numeroParcelas;i++){
+		addLinhaTabelaResultados(i, datas[i-1].format('L'));
 	}	
 }
 
-function adicionarLinha(parcela, data){
+function addLinhaTabelaResultados(parcela, data){
     $("#tabela-resultados tbody").append(
     	"<tr>"+
 	        "<td>"+ parcela +"</td>"+
@@ -116,7 +87,7 @@ function adicionarLinha(parcela, data){
         "</tr>");
 }
 
-function removerTodasLinhas() {
+function limparTabelaResultados() {
     $("#tabela-resultados tbody tr").remove();
 }
 
@@ -128,10 +99,10 @@ function ehDiaUtil(diaDaSemana){
 	} else return false;
 }
 
-function calcularValorParcela(valorVenda, numParcelas, tipoCartao){
+function calcularValorParcela(valorVenda, numeroParcelas, tipoCartao){
 	var valor = Big(valorVenda);
-	if(valor.mod(numParcelas) != 0){
-		var valorParcela = valor.div(numParcelas);
+	if(valor.mod(numeroParcelas) != 0){
+		var valorParcela = valor.div(numeroParcelas);
 		if(ehDizimaPeriodica(valorParcela.toString())){
 			
 		}
