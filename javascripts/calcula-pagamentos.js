@@ -104,7 +104,7 @@ function ehDiaUtil(diaDaSemana){
 
 function calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas){
 	var valores = new Array();
-	var valorParcela = valor.div(numeroParcelas);
+	var valorParcela = valorVenda.div(numeroParcelas);
 
 	if(ehDizimaPeriodica(valorParcela.toString())){
 		valorParcela.round(2,0);
@@ -116,6 +116,7 @@ function calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas)
 			valores.push(valorParcela);
 		}
 	}
+	alert(valorVenda.toString());
 	
 	return valores;	
 }
