@@ -41,7 +41,7 @@ function calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas) {
 	var datas = new Array();
 	var prazo = 30;
 	
-	if(bandeiraCartao == "MC"){
+	if(bandeiraCartao == 4){
 		for(i=1;i<=numeroParcelas;i++){
 			var dataParcela = dataVenda.clone();
 			dataParcela.add(prazo, 'days');
