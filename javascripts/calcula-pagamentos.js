@@ -17,7 +17,16 @@ function calcular(){
 	var bandeiraCartao = "MC";
 	
 	var datas = calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numParcelas);
+
 	montarTabelaResultados(numParcelas, datas);	
+
+	$("#data-venda").prop( "disabled", true );
+	$("#num-parcelas").prop( "disabled", true );
+	$("#botao-calcular").prop( "disabled", true );
+	$("#botao-limpar").prop( "disabled", false );
+	$("#botao-limpar").focus();
+	$("#tabela-resultados").show();
+
 }
 
 function obterNumeroDeParcelas(tipoCartao){
