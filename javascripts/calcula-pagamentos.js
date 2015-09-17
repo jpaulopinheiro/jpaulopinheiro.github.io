@@ -13,8 +13,8 @@ $(function() {
 function calcular(){
 	var dataVenda = moment($("#data-venda").val());
 	var tipoCartao = $("#tipo-cartao").val();
+	var bandeiraCartao = $("#bandeira-cartao").val();
 	var numeroParcelas = obterNumeroParcelas(tipoCartao);
-	var bandeiraCartao = "MC";
 	
 	var datas = calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas);
 
