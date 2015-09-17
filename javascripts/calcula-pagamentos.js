@@ -110,7 +110,7 @@ function calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas)
 	if(ehDizimaPeriodica(valorParcela.toString())){
 		valorParcela.round(2,0);
 		var ajuste = valorBruto.minus(valorParcela.times(numeroParcelas));
-		var valorParcela1 = Big(valorParcela.plus(ajuste);
+		var valorParcela1 = Big(valorParcela.plus(ajuste));
 		
 		valores.push(valorParcela1);
 		for(i=2;i<=numeroParcelas;i++){
