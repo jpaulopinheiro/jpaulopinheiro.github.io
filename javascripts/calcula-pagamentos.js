@@ -12,13 +12,15 @@ $(function() {
 
 function calcular(){
 	var dataVenda = moment($("#data-venda").val());
+	var valorVenda = moment($("#valor-venda").val());
 	var tipoCartao = $("#tipo-cartao").val();
 	var bandeiraCartao = $("#bandeira-cartao").val();
 	var numeroParcelas = obterNumeroParcelas(tipoCartao);
 	
 	var datas = calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas);
-
-	montarTabelaResultados(numeroParcelas, datas);	
+	//var valores = calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas);
+	
+	montarTabelaResultados(numeroParcelas, datas, valores);	
 
 	$("#data-venda").prop( "disabled", true );
 	$("#num-parcelas").prop( "disabled", true );
@@ -73,17 +75,18 @@ function habilitarParcelamento(){
 	} else $("#parcelamento").hide();
 }
 
-function montarTabelaResultados(numeroParcelas, datas){
+function montarTabelaResultados(numeroParcelas, datas, valores){
 	for(i=1;i<=numeroParcelas;i++){
 		addLinhaTabelaResultados(i, datas[i-1].format('L'));
 	}	
 }
 
-function addLinhaTabelaResultados(parcela, data){
+function addLinhaTabelaResultados(parcela, data, valor){
     $("#tabela-resultados tbody").append(
     	"<tr>"+
 	        "<td>"+ parcela +"</td>"+
 	        "<td>"+ data +"</td>"+
+	        "<td>"+ valor +"</td>"+
         "</tr>");
 }
 
