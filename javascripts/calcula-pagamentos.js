@@ -132,29 +132,9 @@ function calcularValorParcela(valorVenda, numeroParcelas, tipoCartao){
 }
 
 function ehDizimaPeriodica(valor){
-	var strValor = formatDecimal(valor);
+	var fraction = new Fraction(valor);
+	var strValor = fraction.toString();
 	if(strValor.indexOf("(") != -1 && strValor.indexOf(")") != -1){
 		return true;
 	} else return false;	
-}
-
-// https://github.com/infusion/Fraction.js/tree/master
-function formatDecimal(str) {
-    var comma, pre, offset, pad, times, repeat;
-    if (-1 === (comma = str.indexOf(".")))
-        return str;
-    pre = str.substr(0, comma + 1);
-    str = str.substr(comma + 1);
-    for (var i = 0; i < str.length; i++) {
-        offset = str.substr(0, i);
-        for (var j = 0; j < 5; j++) {
-            pad = str.substr(i, j + 1);
-            times = Math.ceil((str.length - offset.length) / pad.length);
-            repeat = new Array(times + 1).join(pad); // Silly String.repeat hack
-            if (0 === (offset + repeat).indexOf(str)) {
-                return pre + offset + "(" + pad + ")";
-            }
-        }
-    }
-    return null;
 }
