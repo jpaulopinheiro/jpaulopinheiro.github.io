@@ -15,7 +15,7 @@ function calcularDatas() {
 	var prazo = 30;
 	
 	var valorVenda = $("#valor-venda").val();
-	calcularValorParcela(90,numParcelas,1);
+	calcularValorParcela(valorVenda,numParcelas,1);
 	
 
 	for(parcela=1;parcela<=numParcelas;parcela++){
