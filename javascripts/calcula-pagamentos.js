@@ -79,7 +79,7 @@ function habilitarParcelamento(){
 function montarTabelaResultados(numeroParcelas, datas, valores){
 	// retirtar a inicialização estática do vetor quando o método para calcular os valores das parcelas estiver pronto
 	for(i=1;i<=numeroParcelas;i++){
-		addLinhaTabelaResultados(i, datas[i-1].format('L'), valores[i-1].toString());
+		addLinhaTabelaResultados(i, datas[i-1].format('L'), valores[i-1]);
 	}	
 }
 
