@@ -84,7 +84,7 @@ function calcularValorParcela(valorVenda, numParcelas, tipoCartao){
 		//if(strFraction.indexOf("(") != -1 && strFraction.indexOf(")") != -1){
 			//alert(strFraction + " = Dízima periódica");
 		//}
-		var strValor = formatDeciaml(valorParcela.toString());
+		var strValor = formatDecimal(valorParcela.toString());
 		if(strValor.indexOf("(") != -1 && strValor.indexOf(")") != -1){
 			alert(strValor + " = Dízima periódica");
 		}
