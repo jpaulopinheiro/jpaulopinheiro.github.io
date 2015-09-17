@@ -79,7 +79,7 @@ function calcularValorParcela(valorVenda, numParcelas, tipoCartao){
 	var valor = Big(valorVenda);
 	if(valor.mod(numParcelas) != 0){
 		var valorParcela = valor.div(numParcelas);
-		if(ehDizimaPeriodica(valorParcela.toString()){
+		if(ehDizimaPeriodica(valorParcela.toString())){
 			alert("Dízima Periódica!");
 		}
 	}
