@@ -83,9 +83,9 @@ function calcularValorParcela(valorVenda, numParcelas, tipoCartao){
 	}
 	alert("Usando fraction.js");
 	var x = new Fraction(1/3);
-	alert("1/3 = " + x);
+	alert("1/3 = " + x.toString());
 	var y = new Fraction(4/13);
-	alert("4/13 = " + y);
+	alert("4/13 = " + y.toString());
 	var p = new Fraction([3].length, 6).toString();
 	alert("p = " + p);
 	
