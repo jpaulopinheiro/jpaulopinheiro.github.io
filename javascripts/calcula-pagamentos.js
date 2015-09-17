@@ -76,6 +76,9 @@ function ehDiaUtil(diaDaSemana){
 
 function calcularValorParcela(valorVenda, numParcelas, tipoCartao){
 	var valor = Big(valorVenda);
-	alert(valor.mod(numParcelas));
+	if(valor.mod(numParcelas) != 0){
+		var valorParcela = valor.div(numParcelas);
+		alert(valorParcela);
+	}
 	
 }
