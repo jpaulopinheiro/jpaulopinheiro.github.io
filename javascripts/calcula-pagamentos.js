@@ -14,8 +14,9 @@ function calcularDatas() {
 	var numParcelas = $("#num-parcelas").val();
 	var prazo = 30;
 	
+	var tipoCartao = $("#tipo-cartao").val();
 	var valorVenda = $("#valor-venda").val();
-	calcularValorParcela(valorVenda,numParcelas,1);
+	calcularValorParcela(valorVenda,numParcelas,tipoCartao);
 	
 
 	for(parcela=1;parcela<=numParcelas;parcela++){
@@ -80,5 +81,11 @@ function calcularValorParcela(valorVenda, numParcelas, tipoCartao){
 		var valorParcela = valor.div(numParcelas);
 		alert(valorParcela);
 	}
+	alert("Usando fraction.js");
+	var x = new Fraction(1/3);
+	alert("1/3 = " + x);
+	var y = new Fraction(4/13);
+	alert("4/13 = " + y);
+	
 	
 }
