@@ -79,18 +79,20 @@ function calcularValorParcela(valorVenda, numParcelas, tipoCartao){
 	var valor = Big(valorVenda);
 	if(valor.mod(numParcelas) != 0){
 		var valorParcela = valor.div(numParcelas);
-		//var fraction = Fraction(valorParcela.valueOf());
-		//var strFraction = fraction.toString();
-		//if(strFraction.indexOf("(") != -1 && strFraction.indexOf(")") != -1){
-			//alert(strFraction + " = Dízima periódica");
-		//}
-		var strValor = formatDecimal(valorParcela.toString());
-		if(strValor.indexOf("(") != -1 && strValor.indexOf(")") != -1){
-			alert(strValor + " = Dízima periódica");
+		if(ehDizimaPeriodica(valorParcela.toString()){
+			alert("Dízima Periódica!");
 		}
 	}
 }
 
+function ehDizimaPeriodica(valor){
+	var strValor = formatDecimal(valor);
+	if(strValor.indexOf("(") != -1 && strValor.indexOf(")") != -1){
+		return true;
+	} else return false;	
+}
+
+// https://github.com/infusion/Fraction.js/tree/master
 function formatDecimal(str) {
     var comma, pre, offset, pad, times, repeat;
     if (-1 === (comma = str.indexOf(".")))
