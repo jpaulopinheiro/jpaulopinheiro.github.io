@@ -18,9 +18,8 @@ function calcular(){
 	var numeroParcelas = obterNumeroParcelas(tipoCartao);
 	
 	var datas = calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas);
-	//var valores = calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas);
+	var valores = calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas);
 	
-	var valores = ["1", "2", "3", "4", "5", "6"];
 	montarTabelaResultados(numeroParcelas, datas, valores);	
 
 	$("#data-venda").prop( "disabled", true );
@@ -77,9 +76,8 @@ function habilitarParcelamento(){
 }
 
 function montarTabelaResultados(numeroParcelas, datas, valores){
-	// retirtar a inicialização estática do vetor quando o método para calcular os valores das parcelas estiver pronto
 	for(i=1;i<=numeroParcelas;i++){
-		addLinhaTabelaResultados(i, datas[i-1].format('L'), valores[i-1]);
+		addLinhaTabelaResultados(i, datas[i-1].format('L'), valores[i-1].toString());
 	}	
 }
 
@@ -102,6 +100,25 @@ function ehDiaUtil(diaDaSemana){
 	if($.inArray(diaDaSemana, diasNaoUteis) == -1){
 		return true;
 	} else return false;
+}
+
+function calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas){
+	var valores = new Array();
+	var valorBruto = Big(valorVenda);
+	var valorParcela = valor.div(numeroParcelas);
+
+	if(ehDizimaPeriodica(valorParcela.toString())){
+		valorParcela.round(2,0);
+		var ajuste = valorBruto.minus(valorParcela.times(numeroParcelas));
+		var valorParcela1 = Big(valorParcela.plus(ajuste);
+		
+		valores.push(valorParcela1);
+		for(i=2;i<=numeroParcelas;i++){
+			valores.push(valorParcela);
+		}
+	}
+	
+	return valores;	
 }
 
 function calcularValorParcela(valorVenda, numeroParcelas, tipoCartao){
