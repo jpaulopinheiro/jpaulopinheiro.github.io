@@ -85,11 +85,16 @@ function calcularDatasVisa(dataVenda, numeroParcelas){
 
 function calcularDatasDepositosVisa(dataVenda, numeroParcelas){
 	var datasDepositos = new Array();
-	datasDepositos.push(dataVenda);
+	var dataBase = dataVenda.clone();
+	var diaBase = dataBase.date();
+	datasDepositos.push(dataBase);
 	for(i=2;i<=numeroParcelas;i++){
-		var dataDeposito = dataVenda.add(1, 'months');
-		alert(dataDeposito.format('L'));
+		var dataDeposito = dataBase.add(1, 'months');
 		datasDepositos.push(dataDeposito);
+		if(diaBase != dataBase.date()){
+			dataBase.date(diaBase);
+		}
+		alert(dataDeposito.format('L'));
 	}
 	return datasDepositos;
 }
