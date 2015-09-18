@@ -106,21 +106,57 @@ function ehDiaUtil(diaDaSemana){
 function calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas){
 	var valores = new Array();
 	var valorBruto = Big(valorVenda);
-	var valorParcela = valorBruto.div(numeroParcelas);
+	var valorBrutoParcela = valorBruto.div(numeroParcelas);
 
 	if(ehDizimaPeriodica(valorVenda, numeroParcelas)){
-		valorParcela = valorParcela.round(2,0);
-		var ajuste = valorBruto.minus(valorParcela.times(numeroParcelas));
-		var valorParcela1 = Big(valorParcela.plus(ajuste));
-		
-		valores.push(valorParcela1);
+		valorBrutoParcela = valorBrutoParcela.round(2,0);
+		var ajuste = valorBruto.minus(valorBrutoParcela.times(numeroParcelas));
+		var valorBrutoParcela1 = Big(valorBrutoParcela.plus(ajuste));
+		var valorLiquidoParcela = calcularValorLiquidoParcela(valorBrutoParcela1, tipoCartao, numeroParcelas);
+		valores.push(valorLiquidoParcela1);
+		var valorLiquidoParcels = calcularValorLiquidoParcela(valorBrutoParcela, tipoCartao, numeroParcelas);
 		for(i=2;i<=numeroParcelas;i++){
-			valores.push(valorParcela);
+			valores.push(valorLiquidoParcela);
 		}
+	} else {
+		
 	}
 	return valores;	
 }
 
+function calcularValorLiquidoParcela(valorBrutoParcela, tipoCartao, numeroParcelas){
+	var fator = Big(new Big(1).minus(obterPercentualDesconto(tipoCartao, bandeiraCartao, numeroParcelas)));
+	var valorLiquidoParcela = valorBrutoParcela.times(fator);
+	return valorLiquidoParcela;
+}
+
+function obterPercentualDesconto(tipoCartao, bandeiraCartao, numeroParcelas){
+	var percentualDesconto;
+	if(tipoCartao == 1){
+		// cartão de crédito
+		switch(numeroParcelas){
+			case 1:
+				percentualDesconto = new Big(0.036);
+				break;
+			case 2:
+			case 3:
+				percentualDesconto = new Big(0.0435);
+				break;
+			case 4:
+			case 5:
+			case 6:
+				percentualDesconto = new Big(0.046);
+				break;
+			default:
+				percentualDesconto = new Big(0.051);
+				break;
+		}
+	} else if(tipoCartao == 2){
+		// cartão de débito	
+		percentualDesconto = new Big(0.0245);
+	}
+	return percentualDesconto;
+}
 function calcularValorParcela(valorVenda, numeroParcelas, tipoCartao){
 	var valor = Big(valorVenda);
 	if(valor.mod(numeroParcelas) != 0){
