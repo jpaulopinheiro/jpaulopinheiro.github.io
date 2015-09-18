@@ -134,7 +134,8 @@ function calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas)
 
 function calcularValorLiquidoParcela(valorBrutoParcela, tipoCartao, bandeiraCartao, numeroParcelas){
 	var fator = Big(new Big(1).minus(obterPercentualDesconto(tipoCartao, bandeiraCartao, numeroParcelas)));
-	var valorLiquidoParcela = valorBrutoParcela.times(parseFloat(fator.toString()));
+	var float = parseFloat(fator.toString());
+	var valorLiquidoParcela = valorBrutoParcela.times(float);
 	valorLiquidoParcela = valorLiquidoParcela.round(2,1);
 	return valorLiquidoParcela;
 }
