@@ -194,7 +194,7 @@ function addRodapeTabelaResultados(valorLiquidoTotal){
     $("#tabela-resultados tfoot").append(
     	"<tr>"+
 	        "<th colspan='2'>Total</th>"+
-	        "<th>"+ accounting.formatMoney(valorLiquidoTal, "R$", 2, ".", ",") +"</th>"+
+	        "<th>"+ accounting.formatMoney(valorLiquidoTotal, "R$", 2, ".", ",") +"</th>"+
         "</tr>");
 }
 
