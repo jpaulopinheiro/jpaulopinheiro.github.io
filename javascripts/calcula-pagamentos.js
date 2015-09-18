@@ -176,7 +176,7 @@ function montarTabelaResultados(numeroParcelas, datas, valores){
 	}
 	var valorLiquidoTotal = Big(0);
 	for(i=0;i<valores.length;i++){
-		valorLiquidoTotal.plus(valores[i]);
+		valorLiquidoTotal = valorLiquidoTotal.plus(valores[i]);
 	}
 	$("#valor-liquido-total").html = accounting.formatMoney(parseFloat(valorLiquidoTotal.toString()), "R$", 2, ".", ",");
 }
