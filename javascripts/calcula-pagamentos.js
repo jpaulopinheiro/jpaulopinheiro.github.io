@@ -69,8 +69,7 @@ function calcularDatasVisa(dataVenda, numeroParcelas){
 	var datas = new Array();
 	var datasDepositos = calcularDatasDepositosVisa(dataVenda, numeroParcelas);
 	for(i=0;i<datasDepositos.length;i++){
-		var parzo = 30;
-		var dataPagamento = datasDespositos[i].add(prazo, 'days');
+		var dataPagamento = datasDespositos[i].add(30, 'days');
 		var diaDaSemana = dataPagamento.day();
 		while(!ehDiaUtil(diaDaSemana)){
 			dataPagamento.add(1, 'days');
