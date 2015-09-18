@@ -85,7 +85,6 @@ function calcularDatasVisa(dataVenda, numeroParcelas){
 
 function calcularDatasDepositosVisa(dataVenda, numeroParcelas){
 	var datasDepositos = new Array();
-	var diaBase = dataVenda.get('date');	
 	var dataDeposito = dataVenda.clone();
 	datasDepositos.push(moment(dataDeposito));
 	for(i=1;i<numeroParcelas;i++){
