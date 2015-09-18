@@ -71,10 +71,10 @@ function calcularDatasVisa(dataVenda, numeroParcelas){
 	var prazo = 30;
 	for(i=1;i<=numeroParcelas;i++){
 		var dataParcela = dataVenda.clone();
-		dataParcela.add(prazo, "days");
+		dataParcela.add(prazo, 'days');
 		var diaDaSemana = dataParcela.day();
 		while(!ehDiaUtil(diaDaSemana)){
-			dataParcela.add(1, "days");
+			dataParcela.add(1, 'days');
 			diaDaSemana = dataParcela.day();
 		}
 		datas.push(dataParcela);
@@ -87,8 +87,8 @@ function calcularDatasDepositosVisa(dataVenda, numeroParcelas){
 	var datasDepositos = new Array();
 	datasDepositos.push(dataVenda);
 	for(i=2;i<=numeroParcelas;i++){
-		var dataDeposito = dataVenda.add(1, "months");
-		alert(dataDeposito.format("L"))
+		var dataDeposito = dataVenda.add(1, 'months');
+		alert(dataDeposito.format('L'))
 		datasDepositos.push(dataDeposito);
 	}
 	return datasDepositos;
@@ -99,10 +99,10 @@ function calcularDatasMC(dataVenda, numeroParcelas){
 	var prazo = 30;
 	for(i=1;i<=numeroParcelas;i++){
 		var dataParcela = dataVenda.clone();
-		dataParcela.add(prazo, "days");
+		dataParcela.add(prazo, 'days');
 		var diaDaSemana = dataParcela.day();
 		while(!ehDiaUtil(diaDaSemana)){
-			dataParcela.add(1, "days");
+			dataParcela.add(1, 'days');
 			diaDaSemana = dataParcela.day();
 		}
 		datas.push(dataParcela);
@@ -134,7 +134,7 @@ function addLinhaTabelaResultados(parcela, data, valor){
     $("#tabela-resultados tbody").append(
     	"<tr>"+
 	        "<td>"+ parcela +"</td>"+
-	        "<td>"+ data.format("L") +"</td>"+
+	        "<td>"+ data.format('L') +"</td>"+
 	        "<td>"+ accounting.formatMoney(valor, "R$", 2, ".", ",") +"</td>"+
         "</tr>");
 }
