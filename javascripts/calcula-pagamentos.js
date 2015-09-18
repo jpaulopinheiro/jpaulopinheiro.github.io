@@ -54,26 +54,60 @@ function obterNumeroParcelas(tipoCartao){
 }
  
 function calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas) {
-	var datas = new Array();
-	var prazo = 30;
-	
+	var datas;
 	// MasterCard
 	if(bandeiraCartao == 3){
-		for(i=1;i<=numeroParcelas;i++){
-			var dataParcela = dataVenda.clone();
-			dataParcela.add(prazo, 'days');
-			var diaDaSemana = dataParcela.day();
-			while(!ehDiaUtil(diaDaSemana)){
-				dataParcela.add(1, 'days');
-				diaDaSemana = dataParcela.day();
-			}
-			datas.push(dataParcela);
-			prazo=prazo+30;
-		}
+		datas = calcularDatasMC(dataVenda, numeroParcelas);
 	} else {
-		
+		datas = calcularDatasVisa(dataVenda, numeroParcelas);		
 	}
 	
+	return datas;
+}
+
+function calcularDatasVisa(dataVenda, numeroParcelas){
+	var datas = new Array();
+	var datasDepositos = calcularDatasDepositosVisa(dataVenda, numeroParcelas);
+	var prazo = 30;
+	for(i=1;i<=numeroParcelas;i++){
+		var dataParcela = dataVenda.clone();
+		dataParcela.add(prazo, "days");
+		var diaDaSemana = dataParcela.day();
+		while(!ehDiaUtil(diaDaSemana)){
+			dataParcela.add(1, "days");
+			diaDaSemana = dataParcela.day();
+		}
+		datas.push(dataParcela);
+		prazo=prazo+30;
+	}
+	return datas;
+}
+
+function calcularDatasDepositosVisa(dataVenda, numeroParcelas){
+	var datasDepositos = new Array();
+	datasDepositos.push(dataVenda);
+	for(i=2;i<=numeroParcelas;i++){
+		var dataDeposito = dataVenda.add(1, "months");
+		alert(dataDeposito.format("L"))
+		datasDepositos.push(dataDeposito);
+	}
+	return datasDepositos;
+}
+
+function calcularDatasMC(dataVenda, numeroParcelas){
+	var datas = new Array();
+	var prazo = 30;
+	for(i=1;i<=numeroParcelas;i++){
+		var dataParcela = dataVenda.clone();
+		dataParcela.add(prazo, "days");
+		var diaDaSemana = dataParcela.day();
+		while(!ehDiaUtil(diaDaSemana)){
+			dataParcela.add(1, "days");
+			diaDaSemana = dataParcela.day();
+		}
+		datas.push(dataParcela);
+		prazo=prazo+30;
+	}
 	return datas;
 }
 
@@ -100,7 +134,7 @@ function addLinhaTabelaResultados(parcela, data, valor){
     $("#tabela-resultados tbody").append(
     	"<tr>"+
 	        "<td>"+ parcela +"</td>"+
-	        "<td>"+ data.format('L') +"</td>"+
+	        "<td>"+ data.format("L") +"</td>"+
 	        "<td>"+ accounting.formatMoney(valor, "R$", 2, ".", ",") +"</td>"+
         "</tr>");
 }
