@@ -178,7 +178,7 @@ function montarTabelaResultados(numeroParcelas, datas, valores){
 	for(i=0;i<valores.length;i++){
 		valorLiquidoTotal = valorLiquidoTotal.plus(valores[i]);
 	}
-	addRodapeTabelaResultados(accounting.formatMoney(parseFloat(valorLiquidoTotal.toString()), "R$", 2, ".", ","));
+	addRodapeTabelaResultados(parseFloat(valorLiquidoTotal.toString()));
 }
 
 function addLinhaTabelaResultados(parcela, data, valor){
