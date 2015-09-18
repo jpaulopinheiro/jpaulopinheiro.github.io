@@ -15,7 +15,7 @@ function calcular(){
 	var valorVenda = $("#valor-venda").val();
 	var tipoCartao = $("#tipo-cartao").val();
 	var bandeiraCartao = $("#bandeira-cartao").val();
-	var numeroParcelas = obterNumeroParcelas(tipoCartao);
+	var numeroParcelas = parseInt(obterNumeroParcelas(tipoCartao));
 	
 	var datas = calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas);
 	var valores = calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas);
@@ -120,7 +120,7 @@ function calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas)
 				valores.push(valorLiquidoDemaisParcelas);
 			}
 		} else {
-			var valorLiquidoTodasParcelas = calcularValorLiquidoParcela(valorBrutoParcela1, tipoCartao, bandeiraCartao, numeroParcelas);
+			var valorLiquidoTodasParcelas = calcularValorLiquidoParcela(valorBrutoParcela, tipoCartao, bandeiraCartao, numeroParcelas);
 			for(i=1;i<=numeroParcelas;i++){
 				valores.push(valorLiquidoTodasParcelas);
 			}		
