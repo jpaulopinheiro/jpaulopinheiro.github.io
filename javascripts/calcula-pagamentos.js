@@ -4,7 +4,7 @@ $(function() {
     //! locale : brazilian portuguese (pt-br)
     //! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 
-    var pt_br = _moment__default.defineLocale('pt-br', {
+	moment.locale('pt-br', {
         months : 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_'),
         monthsShort : 'Jan_Fev_Mar_Abr_Mai_Jun_Jul_Ago_Set_Out_Nov_Dez'.split('_'),
         weekdays : 'Domingo_Segunda-Feira_Terça-Feira_Quarta-Feira_Quinta-Feira_Sexta-Feira_Sábado'.split('_'),
@@ -49,8 +49,6 @@ $(function() {
         ordinal : '%dº'
     });
 
-	moment.locale('pt-br');	
-	
 	//setar data atual em $("#data-venda")
     //$("#botao-calcular").click(calcularDatas);
 	$("#botao-calcular").click(calcular);
