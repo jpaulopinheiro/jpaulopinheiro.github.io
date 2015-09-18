@@ -68,7 +68,7 @@ function calcular(){
 	var datas = calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas);
 	var valores = calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas);
 	
-	montarTabelaResultados(numeroParcelas, datas, valores);	
+	montarTabelaResultados(numeroParcelas, datas, valores);
 
 	desabilitarCamposAposCalculo();
 	$("#botao-limpar").focus();
@@ -173,7 +173,12 @@ function habilitarParcelamento(){
 function montarTabelaResultados(numeroParcelas, datas, valores){
 	for(i=1;i<=numeroParcelas;i++){
 		addLinhaTabelaResultados(i, datas[i-1], parseFloat(valores[i-1].toString()));
-	}	
+	}
+	var valorLiquidoTotal = Big(0);
+	for(i=0;i<valores.length;i++){
+		valorLiquidoTotal.plus(valores[i]);
+	}
+	$("#valor-liquido-total").html = ccounting.formatMoney(valorLiquidoTotal, "R$", 2, ".", ",");
 }
 
 function addLinhaTabelaResultados(parcela, data, valor){
