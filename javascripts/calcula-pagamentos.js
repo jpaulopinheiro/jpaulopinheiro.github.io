@@ -200,6 +200,7 @@ function addRodapeTabelaResultados(valorLiquidoTotal){
 
 function limparTabelaResultados() {
     $("#tabela-resultados tbody tr").remove();
+    $("#tabela-resultados tfoot tr").remove();
 }
 
 function ehDiaUtil(diaDaSemana){
