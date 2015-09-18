@@ -108,21 +108,26 @@ function calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas)
 	var valorBruto = Big(valorVenda);
 	var valorBrutoParcela = valorBruto.div(numeroParcelas);
 
-	if(ehDizimaPeriodica(valorVenda, numeroParcelas)){
-		valorBrutoParcela = valorBrutoParcela.round(2,0);
-		var ajuste = valorBruto.minus(valorBrutoParcela.times(numeroParcelas));
-		var valorBrutoParcela1 = Big(valorBrutoParcela.plus(ajuste));
-		var valorLiquidoParcela1 = calcularValorLiquidoParcela(valorBrutoParcela1, tipoCartao, bandeiraCartao, numeroParcelas);
-		valores.push(valorLiquidoParcela1);
-		var valorLiquidoDemaisParcelas = calcularValorLiquidoParcela(valorBrutoParcela, tipoCartao, bandeiraCartao, numeroParcelas);
-		for(i=2;i<=numeroParcelas;i++){
-			valores.push(valorLiquidoDemaisParcelas);
+	if(tipoCartao == 1){
+		if(ehDizimaPeriodica(valorVenda, numeroParcelas)){
+			valorBrutoParcela = valorBrutoParcela.round(2,0);
+			var ajuste = valorBruto.minus(valorBrutoParcela.times(numeroParcelas));
+			var valorBrutoParcela1 = Big(valorBrutoParcela.plus(ajuste));
+			var valorLiquidoParcela1 = calcularValorLiquidoParcela(valorBrutoParcela1, tipoCartao, bandeiraCartao, numeroParcelas);
+			valores.push(valorLiquidoParcela1);
+			var valorLiquidoDemaisParcelas = calcularValorLiquidoParcela(valorBrutoParcela, tipoCartao, bandeiraCartao, numeroParcelas);
+			for(i=2;i<=numeroParcelas;i++){
+				valores.push(valorLiquidoDemaisParcelas);
+			}
+		} else {
+			var valorLiquidoTodasParcelas = calcularValorLiquidoParcela(valorBrutoParcela1, tipoCartao, bandeiraCartao, numeroParcelas);
+			for(i=1;i<=numeroParcelas;i++){
+				valores.push(valorLiquidoTodasParcelas);
+			}		
 		}
-	} else {
-		var valorLiquidoTodasParcelas = calcularValorLiquidoParcela(valorBrutoParcela1, tipoCartao, bandeiraCartao, numeroParcelas);
-		for(i=1;i<=numeroParcelas;i++){
-			valores.push(valorLiquidoTodasParcelas);
-		}		
+	} else if(tipoCartao == 2){
+		var valorLiquidoParcela = calcularValorLiquidoParcela(valorBrutoParcela, tipoCartao, bandeiraCartao, numeroParcelas);
+		valores.push(valorLiquidoParcela);
 	}
 	return valores;	
 }
