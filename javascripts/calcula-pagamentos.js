@@ -112,14 +112,17 @@ function calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas)
 		valorBrutoParcela = valorBrutoParcela.round(2,0);
 		var ajuste = valorBruto.minus(valorBrutoParcela.times(numeroParcelas));
 		var valorBrutoParcela1 = Big(valorBrutoParcela.plus(ajuste));
-		var valorLiquidoParcela = calcularValorLiquidoParcela(valorBrutoParcela1, tipoCartao, numeroParcelas);
+		var valorLiquidoParcela1 = calcularValorLiquidoParcela(valorBrutoParcela1, tipoCartao, numeroParcelas);
 		valores.push(valorLiquidoParcela1);
-		var valorLiquidoParcels = calcularValorLiquidoParcela(valorBrutoParcela, tipoCartao, numeroParcelas);
+		var valorLiquidoDemaisParcelas = calcularValorLiquidoParcela(valorBrutoParcela, tipoCartao, numeroParcelas);
 		for(i=2;i<=numeroParcelas;i++){
-			valores.push(valorLiquidoParcela);
+			valores.push(valorLiquidoDemaisParcelas);
 		}
 	} else {
-		
+		var valorLiquidoTodasParcelas = calcularValorLiquidoParcela(valorBrutoParcela1, tipoCartao, numeroParcelas);
+		for(i=1;i<=numeroParcelas;i++){
+			valores.push(valorLiquidoTodasParcelas);
+		}		
 	}
 	return valores;	
 }
@@ -127,6 +130,7 @@ function calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas)
 function calcularValorLiquidoParcela(valorBrutoParcela, tipoCartao, numeroParcelas){
 	var fator = Big(new Big(1).minus(obterPercentualDesconto(tipoCartao, bandeiraCartao, numeroParcelas)));
 	var valorLiquidoParcela = valorBrutoParcela.times(fator);
+	valorLiquidoParcela = valorLiquidoParcela.round(2,1);
 	return valorLiquidoParcela;
 }
 
