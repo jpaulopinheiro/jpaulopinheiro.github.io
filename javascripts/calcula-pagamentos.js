@@ -7,7 +7,9 @@ $(function() {
     $("#tipo-cartao").change(habilitarParcelamento);
     $("#botao-limpar").prop( "disabled", true );
     $("#tabela-resultados").hide();
-    $("#parcelamento").hide();
+    if($("#tipo-cartao").val == 2){
+		$("#parcelamento").hide();
+    }
 });
 
 function calcular(){
@@ -91,7 +93,7 @@ function habilitarParcelamento(){
 
 function montarTabelaResultados(numeroParcelas, datas, valores){
 	for(i=1;i<=numeroParcelas;i++){
-		addLinhaTabelaResultados(i, datas[i-1].format('L'), valores[i-1].toString());
+		addLinhaTabelaResultados(i, datas[i-1], parseFloat(valores[i-1].toString()));
 	}	
 }
 
@@ -99,8 +101,8 @@ function addLinhaTabelaResultados(parcela, data, valor){
     $("#tabela-resultados tbody").append(
     	"<tr>"+
 	        "<td>"+ parcela +"</td>"+
-	        "<td>"+ data +"</td>"+
-	        "<td>"+ valor +"</td>"+
+	        "<td>"+ data.format('L') +"</td>"+
+	        "<td>"+ accounting.formatMoney(valor, "R$", 2, ".", ",") +"</td>"+
         "</tr>");
 }
 
