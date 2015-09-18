@@ -91,10 +91,14 @@ function calcularDatasDepositosVisa(dataVenda, numeroParcelas){
 	for(i=2;i<=numeroParcelas;i++){
 		var dataDeposito = dataBase.add(1, 'months');
 		datasDepositos.push(dataDeposito);
+		alert(dataDeposito.format('L'));
 		if(diaBase != dataBase.get('date')){
 			dataBase.set('date', diaBase);
 		}
-		alert(dataDeposito.format('L'));
+
+	}
+	for(i=1;i<=numeroParcelas;i++){
+		alert(dataDeposito[i-1].format('L'));
 	}
 	return datasDepositos;
 }
