@@ -30,7 +30,7 @@ function calcular(){
 
 function desabilitarCamposAposCalculo(){
 	$("#data-venda").prop( "disabled", true );
-	$("#valor-parcelas").prop( "disabled", true );
+	$("#valor-venda").prop( "disabled", true );
 	$("#tipo-cartao").prop( "disabled", true );
 	$("#bandeira-cartao").prop( "disabled", true );
 	$("#numero-parcelas").prop( "disabled", true );
@@ -40,7 +40,7 @@ function desabilitarCamposAposCalculo(){
 
 function habilitarCamposParaCalculo(){
 	$("#data-venda").prop( "disabled", false );
-	$("#valor-parcelas").prop( "disabled", false );
+	$("#valor-venda").prop( "disabled", false );
 	$("#tipo-cartao").prop( "disabled", false );
 	$("#bandeira-cartao").prop( "disabled", false );
 	$("#numero-parcelas").prop( "disabled", false );
