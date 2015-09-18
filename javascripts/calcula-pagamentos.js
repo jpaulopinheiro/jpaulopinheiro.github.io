@@ -22,13 +22,30 @@ function calcular(){
 	
 	montarTabelaResultados(numeroParcelas, datas, valores);	
 
-	$("#data-venda").prop( "disabled", true );
-	$("#num-parcelas").prop( "disabled", true );
-	$("#botao-calcular").prop( "disabled", true );
-	$("#botao-limpar").prop( "disabled", false );
+	desabilitarCamposAposCalculo();
 	$("#botao-limpar").focus();
 	$("#tabela-resultados").show();
 
+}
+
+function desabilitarCamposAposCalculo(){
+	$("#data-venda").prop( "disabled", true );
+	$("#valor-parcelas").prop( "disabled", true );
+	$("#tipo-cartao").prop( "disabled", true );
+	$("#bandeira-cartao").prop( "disabled", true );
+	$("#numero-parcelas").prop( "disabled", true );
+	$("#botao-calcular").prop( "disabled", true );
+	$("#botao-limpar").prop( "disabled", false );
+}
+
+function habilitarCamposParaCalculo(){
+	$("#data-venda").prop( "disabled", false );
+	$("#valor-parcelas").prop( "disabled", false );
+	$("#tipo-cartao").prop( "disabled", false );
+	$("#bandeira-cartao").prop( "disabled", false );
+	$("#numero-parcelas").prop( "disabled", false );
+	$("#botao-calcular").prop( "disabled", false );
+	$("#botao-limpar").prop( "disabled", true );
 }
 
 function obterNumeroParcelas(tipoCartao){
@@ -42,7 +59,7 @@ function calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas) {
 	var prazo = 30;
 	
 	// MasterCard
-	if(bandeiraCartao == 3){
+	//if(bandeiraCartao == 3){
 		for(i=1;i<=numeroParcelas;i++){
 			var dataParcela = dataVenda.clone();
 			dataParcela.add(prazo, 'days');
@@ -54,17 +71,13 @@ function calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas) {
 			datas.push(dataParcela);
 			prazo=prazo+30;
 		}
-	}
+	//}
 	
 	return datas;
 }
 
 function limpar() {
-	$("#data-venda").prop( "disabled", false );
-	$("#data-venda").focus();
-	$("#num-parcelas").prop( "disabled", false );
-	$("#botao-calcular").prop( "disabled", false );
-	$("#botao-limpar").prop( "disabled", true );
+	habilitarCamposParaCalculo();
 	limparTabelaResultados();
 	$("#tabela-resultados").hide();
 }
