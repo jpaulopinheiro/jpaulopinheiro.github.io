@@ -178,7 +178,7 @@ function montarTabelaResultados(numeroParcelas, datas, valores){
 	for(i=0;i<valores.length;i++){
 		valorLiquidoTotal.plus(valores[i]);
 	}
-	$("#valor-liquido-total").html = accounting.formatMoney(valorLiquidoTotal, "R$", 2, ".", ",");
+	$("#valor-liquido-total").html = accounting.formatMoney(parseFloat(valorLiquidoTotal.toString()), "R$", 2, ".", ",");
 }
 
 function addLinhaTabelaResultados(parcela, data, valor){
