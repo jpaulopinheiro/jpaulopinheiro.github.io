@@ -68,17 +68,15 @@ function calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas) {
 function calcularDatasVisa(dataVenda, numeroParcelas){
 	var datas = new Array();
 	var datasDepositos = calcularDatasDepositosVisa(dataVenda, numeroParcelas);
-	var prazo = 30;
-	for(i=1;i<=numeroParcelas;i++){
-		var dataParcela = dataVenda.clone();
-		dataParcela.add(prazo, 'days');
-		var diaDaSemana = dataParcela.day();
+	for(i=0;i<datasDepositos.length;i++){
+		var parzo = 30;
+		var dataPagamento = datasDespositos[i].add(prazo, 'days');
+		var diaDaSemana = dataPagamento.day();
 		while(!ehDiaUtil(diaDaSemana)){
-			dataParcela.add(1, 'days');
-			diaDaSemana = dataParcela.day();
+			dataPagamento.add(1, 'days');
+			diaDaSemana = dataPagamento.day();
 		}
-		datas.push(dataParcela);
-		prazo=prazo+30;
+		datas.push(dataPagamento);
 	}
 	return datas;
 }
@@ -90,9 +88,6 @@ function calcularDatasDepositosVisa(dataVenda, numeroParcelas){
 		var dataDeposito = dataVenda.clone();
 		dataDeposito.add(i, 'months');
 		datasDepositos.push(moment(dataDeposito));
-	}
-	for(i=0;i<numeroParcelas;i++){
-		alert(datasDepositos[i].format('L'));
 	}
 	return datasDepositos;
 }
