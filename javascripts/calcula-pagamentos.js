@@ -178,7 +178,7 @@ function montarTabelaResultados(numeroParcelas, datas, valores){
 	for(i=0;i<valores.length;i++){
 		valorLiquidoTotal = valorLiquidoTotal.plus(valores[i]);
 	}
-	$("#valor-liquido-total").html = accounting.formatMoney(parseFloat(valorLiquidoTotal.toString()), "R$", 2, ".", ",");
+	addRodapeTabelaResultados(accounting.formatMoney(parseFloat(valorLiquidoTotal.toString()), "R$", 2, ".", ","));
 }
 
 function addLinhaTabelaResultados(parcela, data, valor){
@@ -187,6 +187,14 @@ function addLinhaTabelaResultados(parcela, data, valor){
 	        "<td>"+ parcela +"</td>"+
 	        "<td>"+ data.format('L') +"</td>"+
 	        "<td>"+ accounting.formatMoney(valor, "R$", 2, ".", ",") +"</td>"+
+        "</tr>");
+}
+
+function addRodapeTabelaResultados(valorLiquidoTotal){
+    $("#tabela-resultados tfoot").append(
+    	"<tr>"+
+	        "<th colspan='2'>Total</th>"+
+	        "<th>"+ accounting.formatMoney(valorLiquidoTal, "R$", 2, ".", ",") +"</th>"+
         "</tr>");
 }
 
