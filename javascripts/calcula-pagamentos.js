@@ -7,7 +7,7 @@ $(function() {
     $("#tipo-cartao").change(habilitarParcelamento);
     $("#botao-limpar").prop( "disabled", true );
     $("#tabela-resultados").hide();
-    if($("#tipo-cartao").val == 2){
+    if($("#tipo-cartao").val() == 2){
 		$("#parcelamento").hide();
     }
 });
