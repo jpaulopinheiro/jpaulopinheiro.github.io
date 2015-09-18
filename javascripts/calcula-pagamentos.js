@@ -7,9 +7,6 @@ $(function() {
     $("#tipo-cartao").change(habilitarParcelamento);
     $("#botao-limpar").prop( "disabled", true );
     $("#tabela-resultados").hide();
-    if($("#tipo-cartao").val() == 2){
-		$("#parcelamento").hide();
-    }
 });
 
 function calcular(){
@@ -61,7 +58,7 @@ function calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas) {
 	var prazo = 30;
 	
 	// MasterCard
-	//if(bandeiraCartao == 3){
+	if(bandeiraCartao == 3){
 		for(i=1;i<=numeroParcelas;i++){
 			var dataParcela = dataVenda.clone();
 			dataParcela.add(prazo, 'days');
@@ -73,7 +70,9 @@ function calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas) {
 			datas.push(dataParcela);
 			prazo=prazo+30;
 		}
-	//}
+	} else {
+		
+	}
 	
 	return datas;
 }
@@ -181,15 +180,6 @@ function obterPercentualDesconto(tipoCartao, bandeiraCartao, numeroParcelas){
 		percentualDesconto = new Big(0.0245);
 	}
 	return percentualDesconto;
-}
-function calcularValorParcela(valorVenda, numeroParcelas, tipoCartao){
-	var valor = Big(valorVenda);
-	if(valor.mod(numeroParcelas) != 0){
-		var valorParcela = valor.div(numeroParcelas);
-		if(ehDizimaPeriodica(valorParcela.toString())){
-			
-		}
-	}
 }
 
 function ehDizimaPeriodica(numerador, denominador){
