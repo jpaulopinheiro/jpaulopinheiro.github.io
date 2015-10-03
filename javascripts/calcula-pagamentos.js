@@ -158,22 +158,26 @@ function obterPercentualDesconto(tipoCartao, bandeiraCartao, numeroParcelas){
 	var percentualDesconto;
 	if(tipoCartao == 1){
 		// cartão de crédito
-		switch(numeroParcelas){
-			case 1:
-				percentualDesconto = new Big(0.036);
-				break;
-			case 2:
-			case 3:
-				percentualDesconto = new Big(0.0435);
-				break;
-			case 4:
-			case 5:
-			case 6:
-				percentualDesconto = new Big(0.046);
-				break;
-			default:
-				percentualDesconto = new Big(0.051);
-				break;
+		if(bandeiraCartao == 5){
+			percentualDesconto = new Big(0.041);
+		} else {
+			switch(numeroParcelas){
+				case 1:
+					percentualDesconto = new Big(0.036);
+					break;
+				case 2:
+				case 3:
+					percentualDesconto = new Big(0.0435);
+					break;
+				case 4:
+				case 5:
+				case 6:
+					percentualDesconto = new Big(0.046);
+					break;
+				default:
+					percentualDesconto = new Big(0.051);
+					break;
+			}
 		}
 	} else if(tipoCartao == 2){
 		// cartão de débito	
