@@ -1,5 +1,54 @@
 $(function() {
-	moment.locale('pt-BR');
+
+    //! moment.js locale configuration
+    //! locale : brazilian portuguese (pt-br)
+    //! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
+
+	moment.locale('pt-br', {
+        months : 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_'),
+        monthsShort : 'Jan_Fev_Mar_Abr_Mai_Jun_Jul_Ago_Set_Out_Nov_Dez'.split('_'),
+        weekdays : 'Domingo_Segunda-Feira_Terça-Feira_Quarta-Feira_Quinta-Feira_Sexta-Feira_Sábado'.split('_'),
+        weekdaysShort : 'Dom_Seg_Ter_Qua_Qui_Sex_Sáb'.split('_'),
+        weekdaysMin : 'Dom_2ª_3ª_4ª_5ª_6ª_Sáb'.split('_'),
+        longDateFormat : {
+            LT : 'HH:mm',
+            LTS : 'HH:mm:ss',
+            L : 'DD/MM/YYYY',
+            LL : 'D [de] MMMM [de] YYYY',
+            LLL : 'D [de] MMMM [de] YYYY [às] HH:mm',
+            LLLL : 'dddd, D [de] MMMM [de] YYYY [às] HH:mm'
+        },
+        calendar : {
+            sameDay: '[Hoje às] LT',
+            nextDay: '[Amanhã às] LT',
+            nextWeek: 'dddd [às] LT',
+            lastDay: '[Ontem às] LT',
+            lastWeek: function () {
+                return (this.day() === 0 || this.day() === 6) ?
+                    '[Último] dddd [às] LT' : // Saturday + Sunday
+                    '[Última] dddd [às] LT'; // Monday - Friday
+            },
+            sameElse: 'L'
+        },
+        relativeTime : {
+            future : 'em %s',
+            past : '%s atrás',
+            s : 'poucos segundos',
+            m : 'um minuto',
+            mm : '%d minutos',
+            h : 'uma hora',
+            hh : '%d horas',
+            d : 'um dia',
+            dd : '%d dias',
+            M : 'um mês',
+            MM : '%d meses',
+            y : 'um ano',
+            yy : '%d anos'
+        },
+        ordinalParse: /\d{1,2}º/,
+        ordinal : '%dº'
+    });
+
 	//setar data atual em $("#data-venda")
     //$("#botao-calcular").click(calcularDatas);
 	$("#botao-calcular").click(calcular);
@@ -19,7 +68,7 @@ function calcular(){
 	var datas = calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas);
 	var valores = calcularValores(valorVenda, tipoCartao, bandeiraCartao, numeroParcelas);
 	
-	montarTabelaResultados(numeroParcelas, datas, valores);	
+	montarTabelaResultados(numeroParcelas, datas, valores);
 
 	desabilitarCamposAposCalculo();
 	$("#botao-limpar").focus();
@@ -54,26 +103,57 @@ function obterNumeroParcelas(tipoCartao){
 }
  
 function calcularDatas(dataVenda, tipoCartao, bandeiraCartao, numeroParcelas) {
-	var datas = new Array();
-	var prazo = 30;
-	
+	var datas;
 	// MasterCard
 	if(bandeiraCartao == 3){
-		for(i=1;i<=numeroParcelas;i++){
-			var dataParcela = dataVenda.clone();
-			dataParcela.add(prazo, 'days');
-			var diaDaSemana = dataParcela.day();
-			while(!ehDiaUtil(diaDaSemana)){
-				dataParcela.add(1, 'days');
-				diaDaSemana = dataParcela.day();
-			}
-			datas.push(dataParcela);
-			prazo=prazo+30;
-		}
+		datas = calcularDatasMC(dataVenda, numeroParcelas);
 	} else {
-		
+		datas = calcularDatasVisa(dataVenda, numeroParcelas);		
 	}
 	
+	return datas;
+}
+
+function calcularDatasVisa(dataVenda, numeroParcelas){
+	var datas = new Array();
+	var datasDepositos = calcularDatasDepositosVisa(dataVenda, numeroParcelas);
+	for(i=0;i<datasDepositos.length;i++){
+		var dataPagamento = datasDepositos[i].add(30, 'days');
+		var diaDaSemana = dataPagamento.day();
+		while(!ehDiaUtil(diaDaSemana)){
+			dataPagamento.add(1, 'days');
+			diaDaSemana = dataPagamento.day();
+		}
+		datas.push(dataPagamento);
+	}
+	return datas;
+}
+
+function calcularDatasDepositosVisa(dataVenda, numeroParcelas){
+	var datasDepositos = new Array();
+	datasDepositos.push(moment(dataVenda));
+	for(i=1;i<numeroParcelas;i++){
+		var dataDeposito = dataVenda.clone();
+		dataDeposito.add(i, 'months');
+		datasDepositos.push(moment(dataDeposito));
+	}
+	return datasDepositos;
+}
+
+function calcularDatasMC(dataVenda, numeroParcelas){
+	var datas = new Array();
+	var prazo = 30;
+	for(i=1;i<=numeroParcelas;i++){
+		var dataParcela = dataVenda.clone();
+		dataParcela.add(prazo, 'days');
+		var diaDaSemana = dataParcela.day();
+		while(!ehDiaUtil(diaDaSemana)){
+			dataParcela.add(1, 'days');
+			diaDaSemana = dataParcela.day();
+		}
+		datas.push(dataParcela);
+		prazo=prazo+30;
+	}
 	return datas;
 }
 
@@ -93,7 +173,12 @@ function habilitarParcelamento(){
 function montarTabelaResultados(numeroParcelas, datas, valores){
 	for(i=1;i<=numeroParcelas;i++){
 		addLinhaTabelaResultados(i, datas[i-1], parseFloat(valores[i-1].toString()));
-	}	
+	}
+	var valorLiquidoTotal = Big(0);
+	for(i=0;i<valores.length;i++){
+		valorLiquidoTotal = valorLiquidoTotal.plus(valores[i]);
+	}
+	addRodapeTabelaResultados(parseFloat(valorLiquidoTotal.toString()));
 }
 
 function addLinhaTabelaResultados(parcela, data, valor){
@@ -105,8 +190,17 @@ function addLinhaTabelaResultados(parcela, data, valor){
         "</tr>");
 }
 
+function addRodapeTabelaResultados(valorLiquidoTotal){
+    $("#tabela-resultados tfoot").append(
+    	"<tr>"+
+	        "<th colspan='2'>Total</th>"+
+	        "<th>"+ accounting.formatMoney(valorLiquidoTotal, "R$", 2, ".", ",") +"</th>"+
+        "</tr>");
+}
+
 function limparTabelaResultados() {
     $("#tabela-resultados tbody tr").remove();
+    $("#tabela-resultados tfoot tr").remove();
 }
 
 function ehDiaUtil(diaDaSemana){
