@@ -257,25 +257,25 @@ function obterPercentualDesconto(tipoCartao, bandeiraCartao, numeroParcelas){
 		} else {
 			switch(numeroParcelas){
 				case 1:
-					percentualDesconto = new Big(0.0336);
+					percentualDesconto = new Big(0.0315);
 					break;
 				case 2:
 				case 3:
-					percentualDesconto = new Big(0.0411);
+					percentualDesconto = new Big(0.039);
 					break;
 				case 4:
 				case 5:
 				case 6:
-					percentualDesconto = new Big(0.0436);
+					percentualDesconto = new Big(0.0415);
 					break;
 				default:
-					percentualDesconto = new Big(0.0486);
+					percentualDesconto = new Big(0.0465);
 					break;
 			}
 		}
 	} else if(tipoCartao == 2){
 		// cartão de débito	
-		percentualDesconto = new Big(0.0232);
+		percentualDesconto = new Big(0.0218);
 	}
 	return percentualDesconto;
 }
