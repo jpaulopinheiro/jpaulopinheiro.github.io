@@ -72,6 +72,8 @@ if(file_exists(arquivo)){
    //vou trazer seu conteúdo completo
    var texto_arquivo = file_get_contents(arquivo);
    document.write("<pre>" + texto_arquivo + "</pre>");
+} else {
+   document.write("O arquivo não existe.");
 }
 	
 	montarTabelaResultados(numeroParcelas, datas, valores);
