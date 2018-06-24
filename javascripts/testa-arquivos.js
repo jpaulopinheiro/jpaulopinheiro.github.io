@@ -60,6 +60,8 @@ $(function() {
 
 function testar(){
 
+alert("teste");
+	
 var arquivo = "server.js";
 if(file_exists(arquivo)){
    //existe esse arquivo
