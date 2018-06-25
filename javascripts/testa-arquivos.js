@@ -86,6 +86,12 @@ if(file_exists(arquivo)){
 
 }
 
+function limpar() {
+	habilitarCamposParaCalculo();
+	limparTabelaResultados();
+	$("#tabela-resultados").hide();
+}
+
 function desabilitarCamposAposCalculo(){
 	//$("#data-venda").prop( "disabled", true );
 	//$("#valor-venda").prop( "disabled", true );
