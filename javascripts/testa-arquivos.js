@@ -89,7 +89,7 @@ if(file_exists(arquivo)){
 function limpar() {
 	habilitarCamposParaCalculo();
 	limparTabelaResultados();
-	$("#tabela-resultados").hide();
+	//$("#tabela-resultados").hide();
 }
 
 function desabilitarCamposAposCalculo(){
